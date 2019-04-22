@@ -48,8 +48,8 @@ class Task extends EventEmitter {
     this.exec((err, res) => {
       if (err) this.emit('error', err, this);
       this.count++;
-      this.emit('end', res, this);
       this.running = false;
+      this.emit('end', res, this);
     });
     return true;
   }
