@@ -7,6 +7,7 @@ const start = tests => {
     if (tests.length === 0) {
       console.log(`Total: ${count}; Failed: ${failed}`);
       process.exit(failed > 0 ? 1 : 0);
+      return;
     }
     const test = tests.shift();
     console.log(`Started test: ${test.name}`);

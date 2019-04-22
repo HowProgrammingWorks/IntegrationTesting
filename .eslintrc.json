@@ -5,7 +5,7 @@
     "node": true
   },
   "globals": {
-    "memory": true
+    "api": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {

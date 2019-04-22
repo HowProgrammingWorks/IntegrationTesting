@@ -3,6 +3,7 @@
 const assert = require('assert');
 const { Scheduler } = require('./scheduler.js');
 const runner = require('./runner.js');
+const server = require('./server.js');
 
 // Tests
 
@@ -83,8 +84,13 @@ const testFailedTask = next => {
 
 // Execute tests
 
-runner.start([
+const tests = [
   testCreateTask,
   testExecuteTask,
   testFailedTask,
-]);
+];
+
+(async () => {
+  await server.start();
+  runner.start(tests);
+})();
