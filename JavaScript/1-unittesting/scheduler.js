@@ -38,14 +38,17 @@ class Task extends EventEmitter {
     if (!this.active || this.running) return false;
     this.clear(this.timer);
     this.timer = null;
+    this.emit('stop', this);
     return true;
   }
   run() {
     if (!this.active || this.running) return false;
     this.running = true;
-    this.exec(err  => {
+    this.emit('begin', this);
+    this.exec((err, res) => {
       if (err) this.emit('error', err, this);
       this.count++;
+      this.emit('end', res, this);
       this.running = false;
     });
     return true;
@@ -63,7 +66,17 @@ class Scheduler extends EventEmitter {
     const task = new Task(name, time, exec);
     this.tasks.set(name, task);
     task.on('error', err => {
+      this.logger.error(`${name}\t${err.message}`);
       this.emit('error', err, task);
+    });
+    task.on('begin', () => {
+      this.logger.info(`${name}\tbegin`);
+    });
+    task.on('end', (res = '') => {
+      this.logger.info(`${name}\tend\t${res}`);
+    });
+    task.on('stop', () => {
+      this.logger.info(`${name}\tstop`);
     });
     task.start();
     return task;
