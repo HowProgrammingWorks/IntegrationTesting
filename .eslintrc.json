@@ -5,7 +5,7 @@
     "node": true
   },
   "globals": {
-    "api": true
+    "scheduler": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {

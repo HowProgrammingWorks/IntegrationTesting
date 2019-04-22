@@ -3,8 +3,9 @@
 const http = require('http');
 const path = require('path');
 const fs = require('fs').promises;
+const { Scheduler } = require('./scheduler.js');
 
-global.memory = new Map();
+global.scheduler = new Scheduler();
 const api = new Map();
 
 const apiPath = './api/';
