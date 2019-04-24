@@ -83,10 +83,10 @@ class Scheduler extends EventEmitter {
   }
   stop(name) {
     const task = this.tasks.get(name);
-    if (task) {
-      task.stop();
-      this.tasks.delete(name);
-    }
+    if (!task) return false;
+    task.stop();
+    this.tasks.delete(name);
+    return true;
   }
   stopAll() {
     for (const name of this.tasks.keys()) {

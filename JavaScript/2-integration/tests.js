@@ -39,20 +39,17 @@ const testStop = next => {
   });
 };
 
-const testStopUnknown = next => {
+const testStopUnknown = async next => {
   const timer = setTimeout(() => {
     const err = new Error('Can not stop counter');
     assert.fail(err);
     next(err);
   }, 200);
 
-  const req = api.stopCounter('name2');
-  assert.ok(req);
-  req.then(res => {
-    assert.strictEqual(res, 'ok');
-    clearTimeout(timer);
-    setTimeout(next, 150);
-  });
+  const res = await api.stopCounter('name2');
+  assert.strictEqual(res, 'not found');
+  clearTimeout(timer);
+  setTimeout(next, 150);
 };
 
 // Execute tests

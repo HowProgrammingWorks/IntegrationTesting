@@ -1,7 +1,12 @@
 'use strict';
 
 module.exports = async name => {
-  scheduler.stop(name);
-  console.log(`Counter ${name} is stopped`);
-  return 'ok';
+  const res = scheduler.stop(name);
+  if (res) {
+    console.log(`Counter ${name} is stopped`);
+    return 'ok';
+  } else {
+    console.log(`Counter ${name} is not found`);
+    return 'not found';
+  }
 };
