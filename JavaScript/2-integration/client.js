@@ -3,7 +3,6 @@
 const http = require('http');
 
 const api = {};
-
 const methods = ['startCounter', 'stopCounter'];
 
 const createMethod = name => (...args) => new Promise((resolve, reject) => {

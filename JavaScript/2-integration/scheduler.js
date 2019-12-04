@@ -21,9 +21,11 @@ class Task extends EventEmitter {
     this.count = 0;
     this.timer = null;
   }
+
   get active() {
     return !!this.timer;
   }
+
   start() {
     this.stop();
     if (this.running) return false;
@@ -34,6 +36,7 @@ class Task extends EventEmitter {
     }, time);
     return true;
   }
+
   stop() {
     if (!this.active || this.running) return false;
     this.clear(this.timer);
@@ -41,6 +44,7 @@ class Task extends EventEmitter {
     this.emit('stop', this);
     return true;
   }
+
   run() {
     if (!this.active || this.running) return false;
     this.running = true;
@@ -61,6 +65,7 @@ class Scheduler extends EventEmitter {
     this.tasks = new Map();
     this.logger = new Logger();
   }
+
   task(name, time, exec) {
     this.stop(name);
     const task = new Task(name, time, exec);
@@ -81,6 +86,7 @@ class Scheduler extends EventEmitter {
     task.start();
     return task;
   }
+
   stop(name) {
     const task = this.tasks.get(name);
     if (!task) return false;
@@ -88,6 +94,7 @@ class Scheduler extends EventEmitter {
     this.tasks.delete(name);
     return true;
   }
+
   stopAll() {
     for (const name of this.tasks.keys()) {
       this.stop(name);
