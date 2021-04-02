@@ -1,6 +1,6 @@
 'use strict';
 
-const start = tests => {
+const start = (tests) => {
   let failed = 0;
   const count = tests.length;
   const runNext = () => {
@@ -12,7 +12,7 @@ const start = tests => {
     const test = tests.shift();
     console.log(`Started test: ${test.name}`);
     try {
-      test(err => {
+      test((err) => {
         if (err) {
           failed++;
           console.log(`Failed test: ${test.name}`);

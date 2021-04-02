@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = async name => {
+module.exports = async (name) => {
   const res = scheduler.stop(name);
   if (res) {
     console.log(`Counter ${name} is stopped`);

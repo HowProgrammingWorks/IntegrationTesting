@@ -6,7 +6,7 @@ const runner = require('./runner.js');
 
 // Tests
 
-const testCreateTask = next => {
+const testCreateTask = (next) => {
   const timer = setTimeout(() => {
     const err = new Error('Can not create task');
     assert.fail(err);
@@ -15,7 +15,7 @@ const testCreateTask = next => {
 
   const scheduler = new Scheduler();
 
-  scheduler.task('name1', '2019-04-16T18:30Z', done => {
+  scheduler.task('name1', '2019-04-16T18:30Z', (done) => {
     done(null, 'task successed');
   });
 
@@ -30,7 +30,7 @@ const testCreateTask = next => {
   }
 };
 
-const testExecuteTask = next => {
+const testExecuteTask = (next) => {
   const timer = setTimeout(() => {
     const err = new Error('Can not execute task');
     assert.fail(err);
@@ -39,7 +39,7 @@ const testExecuteTask = next => {
 
   const scheduler = new Scheduler();
 
-  scheduler.task('name1', 100, done => {
+  scheduler.task('name1', 100, (done) => {
     let error = null;
     try {
       assert.ok(scheduler.tasks.get('name1').running);
@@ -54,7 +54,7 @@ const testExecuteTask = next => {
   });
 };
 
-const testFailedTask = next => {
+const testFailedTask = (next) => {
   const timer = setTimeout(() => {
     const err = new Error('Task expected to fail');
     assert.fail(err);
@@ -63,7 +63,7 @@ const testFailedTask = next => {
 
   const scheduler = new Scheduler();
 
-  scheduler.task('name1', 100, done => {
+  scheduler.task('name1', 100, (done) => {
     done(new Error('Task failed'));
   });
 

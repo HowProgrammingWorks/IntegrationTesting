@@ -7,7 +7,7 @@ const server = require('./server.js');
 
 // Tests
 
-const testStart = next => {
+const testStart = (next) => {
   const timer = setTimeout(() => {
     const err = new Error('Can not start counter');
     assert.fail(err);
@@ -16,14 +16,14 @@ const testStart = next => {
 
   const req = api.startCounter('name1', 100);
   assert.ok(req);
-  req.then(res => {
+  req.then((res) => {
     assert.strictEqual(res, 'ok');
     clearTimeout(timer);
     setTimeout(next, 150);
   });
 };
 
-const testStop = next => {
+const testStop = (next) => {
   const timer = setTimeout(() => {
     const err = new Error('Can not stop counter');
     assert.fail(err);
@@ -32,14 +32,14 @@ const testStop = next => {
 
   const req = api.stopCounter('name1');
   assert.ok(req);
-  req.then(res => {
+  req.then((res) => {
     assert.strictEqual(res, 'ok');
     clearTimeout(timer);
     setTimeout(next, 150);
   });
 };
 
-const testStopUnknown = async next => {
+const testStopUnknown = async (next) => {
   const timer = setTimeout(() => {
     const err = new Error('Can not stop counter');
     assert.fail(err);

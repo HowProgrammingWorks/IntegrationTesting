@@ -70,7 +70,7 @@ class Scheduler extends EventEmitter {
     this.stop(name);
     const task = new Task(name, time, exec);
     this.tasks.set(name, task);
-    task.on('error', err => {
+    task.on('error', (err) => {
       this.logger.error(`${name}\t${err.message}`);
       this.emit('error', err, task);
     });
