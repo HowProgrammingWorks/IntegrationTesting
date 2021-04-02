@@ -12,15 +12,19 @@ const createMethod = name => (...args) => new Promise((resolve, reject) => {
     path: `/api/${name}`,
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-  }, res => {
+  }, async (res) => {
     if (res.statusCode !== 200) {
       reject();
       return;
     }
     res.setEncoding('utf8');
-    const buffer = [];
-    res.on('data', chunk => buffer.push(chunk));
-    res.on('end', () => resolve(JSON.parse(buffer.join())));
+    const buffers = [];
+    res.on('data', (chunk) => {
+      buffers.push(chunk);
+    }).on('end', () => {
+      const data = Buffer.concat(buffers).toString();
+      resolve(JSON.parse(data));
+    }).on('error', reject);
   });
   req.end(JSON.stringify(args));
 });
