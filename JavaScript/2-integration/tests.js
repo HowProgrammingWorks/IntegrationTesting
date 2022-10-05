@@ -1,6 +1,6 @@
 'use strict';
 
-const assert = require('assert');
+const assert = require('node:assert');
 const { api } = require('./client.js');
 const runner = require('./runner.js');
 const server = require('./server.js');

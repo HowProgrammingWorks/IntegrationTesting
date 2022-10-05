@@ -1,6 +1,6 @@
 'use strict';
 
-const { EventEmitter } = require('events');
+const { EventEmitter } = require('node:events');
 const { Logger } = require('./logger.js');
 
 class Task extends EventEmitter {
