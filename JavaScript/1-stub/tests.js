@@ -9,7 +9,6 @@ const runner = require('./runner.js');
 const testCreateTask = (next) => {
   const timer = setTimeout(() => {
     const err = new Error('Can not create task');
-    assert.fail(err);
     next(err);
   }, 200);
 
@@ -33,7 +32,6 @@ const testCreateTask = (next) => {
 const testExecuteTask = (next) => {
   const timer = setTimeout(() => {
     const err = new Error('Can not execute task');
-    assert.fail(err);
     next(err);
   }, 200);
 
@@ -57,7 +55,6 @@ const testExecuteTask = (next) => {
 const testFailedTask = (next) => {
   const timer = setTimeout(() => {
     const err = new Error('Task expected to fail');
-    assert.fail(err);
     next(err);
   }, 200);
 
@@ -74,10 +71,11 @@ const testFailedTask = (next) => {
       assert.strictEqual(err.message, 'Task failed');
     } catch (err) {
       error = err;
+    } finally {
+      clearTimeout(timer);
+      scheduler.stopAll();
+      next(error);
     }
-    clearTimeout(timer);
-    scheduler.stopAll();
-    next(error);
   });
 };
 
