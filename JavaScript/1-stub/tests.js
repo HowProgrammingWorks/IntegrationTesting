@@ -16,7 +16,7 @@ const testCreateTask = (next) => {
   const scheduler = new Scheduler();
 
   scheduler.task('name1', '2019-04-16T18:30Z', (done) => {
-    done(null, 'task successed');
+    done(null, 'task succeeded');
   });
 
   let error = null;
@@ -47,7 +47,7 @@ const testExecuteTask = (next) => {
       error = err;
     } finally {
       clearTimeout(timer);
-      done(null, 'task successed');
+      done(null, 'task succeeded');
       scheduler.stopAll();
       next(error);
     }

@@ -11,7 +11,7 @@ const api = new Map();
 const apiPath = './api/';
 
 const cacheFile = (name) => {
-  const filePath = apiPath + name;
+  const filePath = `${apiPath}${name}`;
   const key = path.basename(filePath, '.js');
   try {
     const libPath = require.resolve(filePath);
@@ -27,8 +27,8 @@ const cacheFile = (name) => {
   }
 };
 
-const cacheFolder = async (path) => {
-  const files = await fs.readdir(path);
+const cacheFolder = async (folder) => {
+  const files = await fs.readdir(folder);
   for (const file of files) {
     await cacheFile(file);
   }

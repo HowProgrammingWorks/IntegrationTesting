@@ -8,7 +8,7 @@ class Logger {
   log(level, s) {
     const date = new Date().toISOString();
     const color = Logger.color(level);
-    console.log(color + date + '\t' + s + '\x1b[0m');
+    console.log(`${color}${date}\t${s}\x1b[0m`);
   }
 
   warn(s) {
